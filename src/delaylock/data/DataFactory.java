@@ -5,7 +5,7 @@
  */
 package delaylock.data;
 
-import wheeler.generic.data.LogicHandler;
+import wheeler.generic.data.MathHandler;
 import wheeler.generic.data.StringHandler;
 
 /**
@@ -18,7 +18,10 @@ public class DataFactory {
     public static final String charPool = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     
-    /**An array of strings used in conjunction with a keyfile to produce a passcode
+    /**An array of strings used in conjunction with a keyfile to produce a passcode.
+     * If you're reading this and you're making your own version of this project, you can change these strings so that only your code can correctly generate your strings.
+     * By the way, if you're using a compiled DelayLock executable while keeping the code around, consider keeping the code behind another DelayLock passcode when you aren't modifying it; this removes the temptation to just comment out the "delay" code and run the program from the IDE.
+     * Please see the ReadMe for warnings regarding backing up your passcodes/keyfiles/compiled executables/source code.
      */
     public static String[] innerStrings = {
         "KX3NuE2NeJxdybiO742mzGGydUyBzH",
@@ -40,7 +43,7 @@ public class DataFactory {
     public static String getRandomCharacter(){
         return StringHandler.charAt(
                 DataFactory.charPool,
-                LogicHandler.getRandomNumber(DataFactory.charPool.length())
+                MathHandler.getRandomNumber(DataFactory.charPool.length())
             );
     }
     
