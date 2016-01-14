@@ -103,13 +103,12 @@ public class KeyGenerator implements Runnable {
         // Open the reader
         reader = new FileReader(keyfile);
         
-        // Grab keyfile arguments (all characters before the first newline)
+        // Grab keyfile arguments (all characters before the first newline, minus any preceding carriage returns)
         // Arguments are tab-delineated strings
-        String argumentsString = ""; int c;
-        while((c = reader.readChar()) != (int)'\n'){
-            if (c == -1) throw new Exception("Failed to parse the keyfile's argument string");
-            argumentsString += (char)c;
-        }
+        String argumentsString = reader.readLine(false);
+        if (!argumentsString.endsWith("\n"))
+            throw new Exception("Failed to correctly parse the keyfile's argument string");
+        argumentsString = StringHandler.trimNewlines(argumentsString);
         String[] args = StringHandler.parseIntoArray(argumentsString, "\t");
         
         // Based on the arguments version (number in args[0]), parse the arguments and set values
